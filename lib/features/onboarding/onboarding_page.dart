@@ -24,9 +24,15 @@ class OnboardingPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                Text(l10n.onboardingAppBarActionAbout, style: AppTheme.appBarActionTextStyle),
+                Text(
+                  l10n.onboardingAppBarActionAbout,
+                  style: AppTheme.appBarActionTextStyle,
+                ),
                 const SizedBox(width: 24),
-                Text(l10n.onboardingAppBarActionContact, style: AppTheme.appBarActionTextStyle),
+                Text(
+                  l10n.onboardingAppBarActionContact,
+                  style: AppTheme.appBarActionTextStyle,
+                ),
               ],
             ),
           ),
@@ -35,9 +41,7 @@ class OnboardingPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Center(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(
-              maxWidth: 960,
-            ),
+            constraints: const BoxConstraints(maxWidth: 960),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -80,21 +84,21 @@ class OnboardingPage extends StatelessWidget {
                               title: l10n.onboardingInfoCard1Title,
                               description: l10n.onboardingInfoCard1Description,
                               width: 200,
-                              height: 200,
+                              height: 280,
                             ),
                             InfoCard(
                               icon: FontAwesomeIcons.chartLine,
                               title: l10n.onboardingInfoCard2Title,
                               description: l10n.onboardingInfoCard2Description,
                               width: 200,
-                              height: 200,
+                              height: 280,
                             ),
                             InfoCard(
                               icon: FontAwesomeIcons.users,
                               title: l10n.onboardingInfoCard3Title,
                               description: l10n.onboardingInfoCard3Description,
                               width: 200,
-                              height: 200,
+                              height: 280,
                             ),
                           ],
                         );
@@ -137,14 +141,13 @@ class OnboardingPage extends StatelessWidget {
         height: 60,
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: Theme.of(context).dividerColor)),
+          border: Border(
+            top: BorderSide(color: Theme.of(context).dividerColor),
+          ),
           color: bottomAppBarTheme.color,
         ),
         child: Center(
-          child: Text(
-            l10n.footerCopyright,
-            style: AppTheme.footerTextStyle,
-          ),
+          child: Text(l10n.footerCopyright, style: AppTheme.footerTextStyle),
         ),
       ),
     );

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "391813617115",
+    "project_id": "quit-smart-app",
+    "storage_bucket": "quit-smart-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:391813617115:android:78620d1875655ec97543fe",
+        "android_client_info": {
+          "package_name": "com.example.quit_smart_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZtOVjoYH3qR-FMDinRZSQ6cs_wMchsCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
