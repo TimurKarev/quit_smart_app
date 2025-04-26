@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:quit_smart_app/ui/theme/app_theme.dart';
+import 'package:quit_smart_app/ui/ui_kit/uikit.dart';
+import 'package:quit_smart_app/generated/l10n/app_localizations.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    final bottomAppBarTheme = Theme.of(context).bottomAppBarTheme;
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
-      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 1,
-        title: const Text(
-          'QuitSmart',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-        ),
-        actions: const [
+        title: Text(l10n.onboardingAppBarTitle),
+        actions: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
-                Text('About', style: TextStyle(color: Colors.grey)),
-                SizedBox(width: 24),
-                Text('Contact', style: TextStyle(color: Colors.grey)),
+                Text(l10n.onboardingAppBarActionAbout, style: AppTheme.appBarActionTextStyle),
+                const SizedBox(width: 24),
+                Text(l10n.onboardingAppBarActionContact, style: AppTheme.appBarActionTextStyle),
               ],
             ),
           ),
@@ -33,39 +35,35 @@ class OnboardingPage extends StatelessWidget {
           child: ConstrainedBox(
             constraints: const BoxConstraints(
               maxWidth: 960,
-            ), // Roughly max-w-3xl
+            ),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  // Welcome Section
                   Padding(
                     padding: const EdgeInsets.only(bottom: 32.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Start Your Smoke-Free Journey',
-                          style: TextStyle(
-                            fontSize: 30,
+                          l10n.onboardingWelcomeTitle,
+                          style: textTheme.displaySmall?.copyWith(
                             fontWeight: FontWeight.w600,
-                            color: Colors.black87,
+                            color: colorScheme.onSurface,
                           ),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'QuitSmart helps you quit smoking through personalized plans, daily tracking, and supportive community.',
-                          style: TextStyle(fontSize: 16),
+                          l10n.onboardingWelcomeDescription,
+                          style: textTheme.bodyLarge,
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 24),
                       ],
                     ),
                   ),
-
-                  // How It Works
                   Padding(
                     padding: const EdgeInsets.only(bottom: 32.0),
                     child: LayoutBuilder(
@@ -75,82 +73,52 @@ class OnboardingPage extends StatelessWidget {
                           runSpacing: 16.0,
                           alignment: WrapAlignment.center,
                           children: [
-                            _buildFeatureCard(
+                            InfoCard(
                               icon: FontAwesomeIcons.clipboardList,
-                              title: 'Assessment',
-                              description:
-                                  'Take our stage test to determine your smoking habits',
+                              title: l10n.onboardingInfoCard1Title,
+                              description: l10n.onboardingInfoCard1Description,
+                              width: 200,
+                              height: 200,
                             ),
-                            _buildFeatureCard(
+                            InfoCard(
                               icon: FontAwesomeIcons.chartLine,
-                              title: 'Track Progress',
-                              description:
-                                  'Monitor your journey with daily tracking tools',
+                              title: l10n.onboardingInfoCard2Title,
+                              description: l10n.onboardingInfoCard2Description,
+                              width: 200,
+                              height: 200,
                             ),
-                            _buildFeatureCard(
+                            InfoCard(
                               icon: FontAwesomeIcons.users,
-                              title: 'Get Support',
-                              description:
-                                  'Connect with others on the same journey',
+                              title: l10n.onboardingInfoCard3Title,
+                              description: l10n.onboardingInfoCard3Description,
+                              width: 200,
+                              height: 200,
                             ),
                           ],
                         );
                       },
                     ),
                   ),
-
-                  // Action Buttons
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
                       // TODO: Implement Start Stage Test action
                     },
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.all(16.0),
-                      backgroundColor: Colors.grey[900],
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    child: const Text(
-                      'Start Stage Test',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: Text(l10n.onboardingButtonStartTest),
                   ),
                   const SizedBox(height: 12),
                   OutlinedButton(
                     onPressed: () {
                       // TODO: Implement Learn More action
                     },
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.all(16.0),
-                      side: BorderSide(color: Colors.grey[300]!),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    child: const Text(
-                      'Learn More',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: Text(l10n.onboardingButtonLearnMore),
                   ),
                   const SizedBox(height: 12),
                   OutlinedButton(
                     onPressed: () {
                       // TODO: Implement Sign In / Register action
                     },
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.all(16.0),
-                      side: BorderSide(color: Colors.grey[300]!),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                    ),
-                    child: const Text(
-                      'Sign In / Register',
-                      style: TextStyle(fontSize: 16),
-                    ),
+                    child: Text(l10n.onboardingButtonSignInRegister),
                   ),
                 ],
               ),
@@ -158,59 +126,19 @@ class OnboardingPage extends StatelessWidget {
           ),
         ),
       ),
-
       bottomNavigationBar: Container(
         height: 60,
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: Colors.grey[200]!)),
-          color: Colors.white,
+          border: Border(top: BorderSide(color: Theme.of(context).dividerColor)),
+          color: bottomAppBarTheme.color,
         ),
-        child: const Center(
+        child: Center(
           child: Text(
-            '© 2025 QuitSmart. All rights reserved.',
-            style: TextStyle(color: Colors.grey),
+            l10n.footerCopyright,
+            style: AppTheme.footerTextStyle,
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildFeatureCard({
-    required IconData icon,
-    required String title,
-    required String description,
-  }) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 3,
-            offset: const Offset(0, 1),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FaIcon(icon, size: 30),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            description,
-            style: const TextStyle(fontSize: 14),
-            textAlign: TextAlign.center,
-          ),
-        ],
       ),
     );
   }

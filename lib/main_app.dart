@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quit_smart_app/features/onboarding/onboarding_page.dart';
+import 'package:quit_smart_app/ui/theme/app_theme.dart';
+import 'package:flutter_localizations/flutter_localizations.dart'; 
+import 'package:quit_smart_app/generated/l10n/app_localizations.dart'; 
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
@@ -7,11 +10,20 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Quit Smart',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      title: 'Quit Smart', 
+      localizationsDelegates: const [
+        AppLocalizations.delegate, 
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''), 
+        Locale('ru', ''), 
+      ],
+      themeMode: ThemeMode.system,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.lightTheme,
       home: const OnboardingPage(),
       debugShowCheckedModeBanner: false,
     );

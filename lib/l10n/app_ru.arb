@@ -1,0 +1,28 @@
+{
+  "@@locale": "ru",
+
+  "appName": "QuitSmart",
+  "@appName": {
+    "description": "Название приложения"
+  },
+
+  "onboardingAppBarTitle": "QuitSmart",
+  "onboardingAppBarActionAbout": "О нас",
+  "onboardingAppBarActionContact": "Контакты",
+
+  "onboardingWelcomeTitle": "Начните свой путь к жизни без курения",
+  "onboardingWelcomeDescription": "QuitSmart помогает вам бросить курить с помощью персонализированных планов, ежедневного отслеживания и поддерживающего сообщества.",
+
+  "onboardingInfoCard1Title": "Оценка",
+  "onboardingInfoCard1Description": "Пройдите наш тест для определения стадии ваших привычек курения",
+  "onboardingInfoCard2Title": "Отслеживайте прогресс",
+  "onboardingInfoCard2Description": "Следите за своим путем с помощью инструментов ежедневного отслеживания",
+  "onboardingInfoCard3Title": "Получите поддержку",
+  "onboardingInfoCard3Description": "Общайтесь с другими на том же пути",
+
+  "onboardingButtonStartTest": "Начать тест стадии",
+  "onboardingButtonLearnMore": "Узнать больше",
+  "onboardingButtonSignInRegister": "Войти / Зарегистрироваться",
+
+  "footerCopyright": "© 2025 QuitSmart. Все права защищены."
+}

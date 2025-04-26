@@ -1,0 +1,28 @@
+{
+  "@@locale": "en",
+
+  "appName": "QuitSmart",
+  "@appName": {
+    "description": "The name of the application"
+  },
+
+  "onboardingAppBarTitle": "QuitSmart",
+  "onboardingAppBarActionAbout": "About",
+  "onboardingAppBarActionContact": "Contact",
+
+  "onboardingWelcomeTitle": "Start Your Smoke-Free Journey",
+  "onboardingWelcomeDescription": "QuitSmart helps you quit smoking through personalized plans, daily tracking, and supportive community.",
+
+  "onboardingInfoCard1Title": "Assessment",
+  "onboardingInfoCard1Description": "Take our stage test to determine your smoking habits",
+  "onboardingInfoCard2Title": "Track Progress",
+  "onboardingInfoCard2Description": "Monitor your journey with daily tracking tools",
+  "onboardingInfoCard3Title": "Get Support",
+  "onboardingInfoCard3Description": "Connect with others on the same journey",
+
+  "onboardingButtonStartTest": "Start Stage Test",
+  "onboardingButtonLearnMore": "Learn More",
+  "onboardingButtonSignInRegister": "Sign In / Register",
+
+  "footerCopyright": " 2025 QuitSmart. All rights reserved."
+}
