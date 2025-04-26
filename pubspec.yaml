@@ -15,6 +15,7 @@ dependencies:
   google_fonts: ^6.2.1
   font_awesome_flutter: ^10.8.0
   intl: ^0.19.0 # Downgraded to match flutter_localizations
+  go_router: ^14.0.0
 
 dev_dependencies:
   flutter_test:

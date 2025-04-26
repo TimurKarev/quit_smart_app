@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:quit_smart_app/ui/theme/app_theme.dart';
 import 'package:quit_smart_app/ui/ui_kit/uikit.dart';
 import 'package:quit_smart_app/generated/l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart'; // Import GoRouter
+import 'package:quit_smart_app/routing/app_router.dart'; // Import AppRoutes
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -102,7 +104,8 @@ class OnboardingPage extends StatelessWidget {
                   const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
-                      // TODO: Implement Start Stage Test action
+                      // Navigate to the Quiz page
+                      context.push(AppRoutes.quiz);
                     },
                     child: Text(l10n.onboardingButtonStartTest),
                   ),
@@ -110,6 +113,8 @@ class OnboardingPage extends StatelessWidget {
                   OutlinedButton(
                     onPressed: () {
                       // TODO: Implement Learn More action
+                      // Example navigation (if needed):
+                      // context.push(AppRoutes.learnMore); // Assuming a learn more route exists
                     },
                     child: Text(l10n.onboardingButtonLearnMore),
                   ),
@@ -117,6 +122,8 @@ class OnboardingPage extends StatelessWidget {
                   OutlinedButton(
                     onPressed: () {
                       // TODO: Implement Sign In / Register action
+                      // Example navigation (if needed):
+                      // context.push(AppRoutes.signIn); // Assuming a sign in route exists
                     },
                     child: Text(l10n.onboardingButtonSignInRegister),
                   ),
