@@ -1,0 +1,60 @@
+[
+    {
+      "id": "1",
+      "questionText": "How soon after you wake up do you smoke your first cigarette?",
+      "options": [
+        { "text": "Within 5 minutes", "weight": 3 },
+        { "text": "6-30 minutes", "weight": 2 },
+        { "text": "31-60 minutes", "weight": 1 },
+        { "text": "After 60 minutes", "weight": 0 }
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "id": "2",
+      "questionText": "Do you find it difficult to refrain from smoking in places where it is forbidden (e.g., in church, at the library, in cinemas)?",
+      "options": [
+        { "text": "Yes", "weight": 1 },
+        { "text": "No", "weight": 0 }
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "id": "3",
+      "questionText": "Which cigarette would you hate most to give up?",
+      "options": [
+        { "text": "The first one in the morning", "weight": 1 },
+        { "text": "Any other one", "weight": 0 }
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "id": "4",
+      "questionText": "How many cigarettes per day do you smoke?",
+      "options": [
+        { "text": "10 or less", "weight": 0 },
+        { "text": "11-20", "weight": 1 },
+        { "text": "21-30", "weight": 2 },
+        { "text": "31 or more", "weight": 3 }
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "id": "5",
+      "questionText": "Do you smoke more frequently during the first hours after waking than during the rest of the day?",
+      "options": [
+        { "text": "Yes", "weight": 1 },
+        { "text": "No", "weight": 0 }
+      ],
+      "questionType": "single_choice"
+    },
+    {
+      "id": "6",
+      "questionText": "Do you still smoke if you are so ill that you are in bed most of the day?",
+      "options": [
+        { "text": "Yes", "weight": 1 },
+        { "text": "No", "weight": 0 }
+      ],
+      "questionType": "single_choice"
+    }
+  ]
