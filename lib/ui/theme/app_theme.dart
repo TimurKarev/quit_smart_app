@@ -6,42 +6,47 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTheme {
   AppTheme._();
 
-  // --- Static Styles --- 
-  
+  // --- Static Styles ---
+
   // AppBar Actions Text Style
   static TextStyle get appBarActionTextStyle => GoogleFonts.inter(
-        color: ColorPalette.textSecondary,
-        fontSize: 14, // Example size, adjust as needed
-      );
+    color: ColorPalette.textSecondary,
+    fontSize: 14, // Example size, adjust as needed
+  );
 
   // Footer Text Style
   static TextStyle get footerTextStyle => GoogleFonts.inter(
-        color: ColorPalette.textSecondary,
-        fontSize: 12, // Example size, adjust as needed
-      );
+    color: ColorPalette.textSecondary,
+    fontSize: 12, // Example size, adjust as needed
+  );
 
   // Primary Elevated Button Style
   static ButtonStyle get primaryElevatedButtonStyle => ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-        backgroundColor: ColorPalette.baseWhite900, // Use closest palette color
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(CardConstants.cardBorderRadius), // Reuse card radius
-        ),
-        textStyle: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500),
-      );
+    padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+    backgroundColor: ColorPalette.baseWhite900, // Use closest palette color
+    foregroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(
+        CardConstants.cardBorderRadius,
+      ), // Reuse card radius
+    ),
+    textStyle: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500),
+  );
 
   // Secondary Outlined Button Style
-  static ButtonStyle get secondaryOutlinedButtonStyle => OutlinedButton.styleFrom(
+  static ButtonStyle get secondaryOutlinedButtonStyle =>
+      OutlinedButton.styleFrom(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         foregroundColor: ColorPalette.textSecondary,
         side: const BorderSide(color: ColorPalette.grey300),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(CardConstants.cardBorderRadius), // Reuse card radius
+          borderRadius: BorderRadius.circular(
+            CardConstants.cardBorderRadius,
+          ), // Reuse card radius
         ),
         textStyle: GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.w500),
       );
-  // --- End Static Styles --- 
+  // --- End Static Styles ---
 
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
@@ -51,8 +56,9 @@ class AppTheme {
       backgroundColor: Colors.white,
       elevation: 1,
       centerTitle: false, // Align title left
-      titleTextStyle: GoogleFonts.inter( // Use theme text style
-        fontSize: 20, 
+      titleTextStyle: GoogleFonts.inter(
+        // Use theme text style
+        fontSize: 20,
         fontWeight: FontWeight.w600,
         color: ColorPalette.baseContent, // Ensure title color contrasts
       ),
@@ -75,6 +81,9 @@ class AppTheme {
       color: Colors.white,
       elevation: 1,
       // Padding is handled by the widget inside usually
+    ),
+    progressIndicatorTheme: const ProgressIndicatorThemeData(
+      color: ColorPalette.baseContent, // Default color for progress indicators
     ),
     colorScheme: const ColorScheme(
       brightness: Brightness.light,

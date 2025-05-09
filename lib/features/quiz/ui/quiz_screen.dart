@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quit_smart_app/features/quiz/ui/bloc/quiz_controller/quiz_controller_bloc.dart';
+import 'package:quit_smart_app/ui/theme/app_theme.dart';
 
 import 'widgets/quiz_option_widget.dart';
 
@@ -20,6 +21,7 @@ class _QuizScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    final bottomAppBarTheme = Theme.of(context).bottomAppBarTheme;
 
     final String appBarTitle = "QuitSmart";
     final String informationText = "Information";
@@ -36,9 +38,6 @@ class _QuizScreenView extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           appBarTitle,
-          style: textTheme.headlineSmall?.copyWith(
-            color: colorScheme.onSurface,
-          ),
         ),
         actions: [
           TextButton(
@@ -47,19 +46,13 @@ class _QuizScreenView extends StatelessWidget {
             },
             child: Text(
               informationText,
-              style: textTheme.labelLarge?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-              ),
+              style: AppTheme.appBarActionTextStyle,
             ),
           ),
           const SizedBox(width: 16),
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: colorScheme.primary,
-                foregroundColor: colorScheme.onPrimary,
-              ),
               onPressed: () {
                 // TODO: Implement Login action
               },
@@ -67,14 +60,13 @@ class _QuizScreenView extends StatelessWidget {
             ),
           ),
         ],
-        backgroundColor: colorScheme.surface,
-        elevation: 1,
-        shadowColor: colorScheme.shadow.withOpacity(0.1),
       ),
       body: BlocBuilder<QuizControllerBloc, QuizControllerState>(
         builder: (context, state) {
           if (state is QuizControllerInitial) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           }
 
           if (state is QuizControllerInProgress) {
@@ -124,7 +116,7 @@ class _QuizScreenView extends StatelessWidget {
                                   value: progress,
                                   backgroundColor: colorScheme.surfaceVariant,
                                   valueColor: AlwaysStoppedAnimation<Color>(
-                                    colorScheme.primary,
+                                    colorScheme.onSurface,
                                   ),
                                   minHeight: 8,
                                 ),
@@ -143,7 +135,7 @@ class _QuizScreenView extends StatelessWidget {
                         const SizedBox(height: 24),
                         Text(
                           currentQuestion.questionText,
-                          style: const TextStyle(fontSize: 18),
+                          style: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 32),
@@ -187,10 +179,6 @@ class _QuizScreenView extends StatelessWidget {
                               child: Text(previousButtonText),
                             ),
                             ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: colorScheme.primary,
-                                foregroundColor: colorScheme.onPrimary,
-                              ),
                               onPressed:
                                   state.selectedAnswers[currentQuestion.id] ==
                                           null
@@ -231,10 +219,6 @@ class _QuizScreenView extends StatelessWidget {
                     Text(state.resultText, style: textTheme.titleLarge),
                     const SizedBox(height: 32),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: colorScheme.primary,
-                        foregroundColor: colorScheme.onPrimary,
-                      ),
                       onPressed: () {
                         context.read<QuizControllerBloc>().add(
                           QuizControllerInitialized(quiz: state.quiz),
@@ -254,13 +238,16 @@ class _QuizScreenView extends StatelessWidget {
         },
       ),
       bottomNavigationBar: Container(
+        height: 60,
         padding: const EdgeInsets.all(16.0),
-        color: colorScheme.surfaceVariant.withOpacity(0.3),
-        child: Text(
-          ' 2025 QuitSmart. All rights reserved.',
-          textAlign: TextAlign.center,
-          style: textTheme.bodySmall?.copyWith(
-            color: colorScheme.onSurfaceVariant,
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: Theme.of(context).dividerColor)),
+          color: bottomAppBarTheme.color,
+        ),
+        child: Center(
+          child: Text(
+            " 2025 QuitSmart. All rights reserved.",
+            style: AppTheme.footerTextStyle,
           ),
         ),
       ),

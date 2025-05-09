@@ -23,9 +23,9 @@ class QuizOptionWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: isSelected ? colorScheme.primaryContainer.withOpacity(0.3) : colorScheme.surfaceVariant.withOpacity(0.3),
+          color: isSelected ? colorScheme.surfaceVariant : colorScheme.surfaceVariant.withOpacity(0.3),
           border: Border.all(
-            color: isSelected ? colorScheme.primary : colorScheme.outline,
+            color: isSelected ? colorScheme.onSurface : colorScheme.outline,
             width: isSelected ? 2.0 : 1.0,
           ),
           borderRadius: BorderRadius.circular(8.0),
@@ -34,7 +34,7 @@ class QuizOptionWidget extends StatelessWidget {
           children: [
             Icon(
               isSelected ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-              color: isSelected ? colorScheme.primary : colorScheme.onSurfaceVariant,
+              color: isSelected ? colorScheme.onSurface : colorScheme.onSurfaceVariant,
               size: 24,
             ),
             const SizedBox(width: 12),
@@ -42,7 +42,7 @@ class QuizOptionWidget extends StatelessWidget {
               child: Text(
                 text,
                 style: textTheme.bodyLarge?.copyWith(
-                  color: isSelected ? colorScheme.primary : colorScheme.onSurface,
+                  color: isSelected ? colorScheme.onSurface : colorScheme.onSurface,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
                 ),
               ),
