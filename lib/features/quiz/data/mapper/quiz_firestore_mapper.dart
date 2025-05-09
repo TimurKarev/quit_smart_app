@@ -7,7 +7,6 @@ class QuizFirestoreMapper {
       return QuizOption(
         id: data['id'] as String? ?? '',
         text: data['text'] as String,
-        isCorrect: data['isCorrect'] as bool? ?? false,
         weight: data['weight'] as int,
       );
     } catch (e) {
@@ -21,10 +20,13 @@ class QuizFirestoreMapper {
   static QuizQuestion quizQuestionFromMap(Map<String, dynamic> data) {
     try {
       final optionsList = data['options'] as List<dynamic>? ?? [];
-      final List<QuizOption> parsedOptions = optionsList
-          .map((optionData) =>
-              quizOptionFromMap(optionData as Map<String, dynamic>))
-          .toList();
+      final List<QuizOption> parsedOptions =
+          optionsList
+              .map(
+                (optionData) =>
+                    quizOptionFromMap(optionData as Map<String, dynamic>),
+              )
+              .toList();
 
       return QuizQuestion(
         id: data['id'] as String,

@@ -5,7 +5,8 @@ import 'package:quit_smart_app/features/quiz/domain/model/quiz_model.dart';
 part 'quiz_controller_event.dart';
 part 'quiz_controller_state.dart';
 
-class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> {
+class QuizControllerBloc
+    extends Bloc<QuizControllerEvent, QuizControllerState> {
   QuizControllerBloc() : super(QuizControllerInitial()) {
     on<QuizControllerInitialized>(_onQuizControllerInitialized);
     on<QuizControllerAnswerSelected>(_onQuizControllerAnswerSelected);
@@ -17,11 +18,13 @@ class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> 
     QuizControllerInitialized event,
     Emitter<QuizControllerState> emit,
   ) async {
-    emit(QuizControllerInProgress(
-      quiz: event.quiz,
-      currentQuestionIndex: 0,
-      selectedAnswers: {},
-    ));
+    emit(
+      QuizControllerInProgress(
+        quiz: event.quiz,
+        currentQuestionIndex: 0,
+        selectedAnswers: {},
+      ),
+    );
   }
 
   Future<void> _onQuizControllerAnswerSelected(
@@ -30,7 +33,9 @@ class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> 
   ) async {
     if (state is QuizControllerInProgress) {
       final currentState = state as QuizControllerInProgress;
-      final newSelectedAnswers = Map<String, QuizOption>.from(currentState.selectedAnswers);
+      final newSelectedAnswers = Map<String, QuizOption>.from(
+        currentState.selectedAnswers,
+      );
       newSelectedAnswers[event.questionId] = event.selectedOption;
       emit(currentState.copyWith(selectedAnswers: newSelectedAnswers));
     }
@@ -47,20 +52,22 @@ class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> 
         int score = 0;
         currentState.quiz.questions.asMap().forEach((index, question) {
           final selectedOption = currentState.selectedAnswers[question.id];
-          if (selectedOption != null && selectedOption.isCorrect) {
-            score++;
-          }
+          score += selectedOption?.weight ?? 0;
         });
-        emit(QuizControllerResult(
-          quiz: currentState.quiz,
-          selectedAnswers: currentState.selectedAnswers,
-          score: score,
-          totalQuestions: currentState.quiz.questions.length,
-        ));
+        emit(
+          QuizControllerResult(
+            quiz: currentState.quiz,
+            selectedAnswers: currentState.selectedAnswers,
+            score: score,
+            totalQuestions: currentState.quiz.questions.length,
+          ),
+        );
       } else {
-        emit(currentState.copyWith(
-          currentQuestionIndex: currentState.currentQuestionIndex + 1,
-        ));
+        emit(
+          currentState.copyWith(
+            currentQuestionIndex: currentState.currentQuestionIndex + 1,
+          ),
+        );
       }
     }
   }
@@ -72,9 +79,11 @@ class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> 
     if (state is QuizControllerInProgress) {
       final currentState = state as QuizControllerInProgress;
       if (currentState.currentQuestionIndex > 0) {
-        emit(currentState.copyWith(
-          currentQuestionIndex: currentState.currentQuestionIndex - 1,
-        ));
+        emit(
+          currentState.copyWith(
+            currentQuestionIndex: currentState.currentQuestionIndex - 1,
+          ),
+        );
       }
     }
   }

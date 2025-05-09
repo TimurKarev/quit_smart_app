@@ -224,7 +224,7 @@ class _QuizScreenView extends StatelessWidget {
                     Text(resultsTitleText, style: textTheme.headlineMedium),
                     const SizedBox(height: 24),
                     Text(
-                      '$scoreText ${state.score}/${state.totalQuestions}',
+                      '$scoreText ${state.score}',
                       style: textTheme.titleLarge,
                     ),
                     const SizedBox(height: 32),
@@ -233,7 +233,11 @@ class _QuizScreenView extends StatelessWidget {
                         backgroundColor: colorScheme.primary,
                         foregroundColor: colorScheme.onPrimary,
                       ),
-                      onPressed: null,
+                      onPressed: () {
+                        context.read<QuizControllerBloc>().add(
+                          QuizControllerInitialized(quiz: state.quiz),
+                        );
+                      },
                       child: Text(tryAgainButtonText),
                     ),
                   ],
