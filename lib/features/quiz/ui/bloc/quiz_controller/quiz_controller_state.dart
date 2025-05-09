@@ -9,12 +9,11 @@ abstract class QuizControllerState extends Equatable {
 
 class QuizControllerInitial extends QuizControllerState {}
 
-class QuizControllerLoading extends QuizControllerState {}
-
 class QuizControllerInProgress extends QuizControllerState {
   final QuizModel quiz;
   final int currentQuestionIndex;
-  final Map<String, QuizOption?> selectedAnswers; // questionId -> selectedOption
+  final Map<String, QuizOption?>
+  selectedAnswers; // questionId -> selectedOption
 
   const QuizControllerInProgress({
     required this.quiz,

@@ -10,12 +10,13 @@ class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> 
     on<QuizControllerInitialized>(_onQuizControllerInitialized);
     on<QuizControllerAnswerSelected>(_onQuizControllerAnswerSelected);
     on<QuizControllerNextQuestion>(_onQuizControllerNextQuestion);
+    on<QuizControllerPrevQuestion>(_onQuizControllerPrevQuestion);
   }
 
-  void _onQuizControllerInitialized(
+  Future<void> _onQuizControllerInitialized(
     QuizControllerInitialized event,
     Emitter<QuizControllerState> emit,
-  ) {
+  ) async {
     emit(QuizControllerInProgress(
       quiz: event.quiz,
       currentQuestionIndex: 0,
@@ -23,10 +24,10 @@ class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> 
     ));
   }
 
-  void _onQuizControllerAnswerSelected(
+  Future<void> _onQuizControllerAnswerSelected(
     QuizControllerAnswerSelected event,
     Emitter<QuizControllerState> emit,
-  ) {
+  ) async {
     if (state is QuizControllerInProgress) {
       final currentState = state as QuizControllerInProgress;
       final newSelectedAnswers = Map<String, QuizOption>.from(currentState.selectedAnswers);
@@ -35,10 +36,10 @@ class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> 
     }
   }
 
-  void _onQuizControllerNextQuestion(
+  Future<void> _onQuizControllerNextQuestion(
     QuizControllerNextQuestion event,
     Emitter<QuizControllerState> emit,
-  ) {
+  ) async {
     if (state is QuizControllerInProgress) {
       final currentState = state as QuizControllerInProgress;
       if (currentState.isLastQuestion) {
@@ -59,6 +60,20 @@ class QuizControllerBloc extends Bloc<QuizControllerEvent, QuizControllerState> 
       } else {
         emit(currentState.copyWith(
           currentQuestionIndex: currentState.currentQuestionIndex + 1,
+        ));
+      }
+    }
+  }
+
+  Future<void> _onQuizControllerPrevQuestion(
+    QuizControllerPrevQuestion event,
+    Emitter<QuizControllerState> emit,
+  ) async {
+    if (state is QuizControllerInProgress) {
+      final currentState = state as QuizControllerInProgress;
+      if (currentState.currentQuestionIndex > 0) {
+        emit(currentState.copyWith(
+          currentQuestionIndex: currentState.currentQuestionIndex - 1,
         ));
       }
     }

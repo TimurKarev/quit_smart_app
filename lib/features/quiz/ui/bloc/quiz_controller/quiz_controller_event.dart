@@ -4,7 +4,7 @@ abstract class QuizControllerEvent extends Equatable {
   const QuizControllerEvent();
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
 class QuizControllerInitialized extends QuizControllerEvent {
@@ -13,7 +13,7 @@ class QuizControllerInitialized extends QuizControllerEvent {
   const QuizControllerInitialized({required this.quiz});
 
   @override
-  List<Object?> get props => [quiz];
+  List<Object> get props => [quiz];
 }
 
 class QuizControllerAnswerSelected extends QuizControllerEvent {
@@ -26,9 +26,11 @@ class QuizControllerAnswerSelected extends QuizControllerEvent {
   });
 
   @override
-  List<Object?> get props => [questionId, selectedOption];
+  List<Object> get props => [questionId, selectedOption];
 }
 
 class QuizControllerNextQuestion extends QuizControllerEvent {}
+
+class QuizControllerPrevQuestion extends QuizControllerEvent {}
 
 class QuizControllerSubmitted extends QuizControllerEvent {}
