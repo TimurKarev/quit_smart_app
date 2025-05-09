@@ -5,7 +5,9 @@ class QuizFirestoreMapper {
   static QuizOption quizOptionFromMap(Map<String, dynamic> data) {
     try {
       return QuizOption(
+        id: data['id'] as String? ?? '',
         text: data['text'] as String,
+        isCorrect: data['isCorrect'] as bool? ?? false,
         weight: data['weight'] as int,
       );
     } catch (e) {
