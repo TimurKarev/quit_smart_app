@@ -45,30 +45,33 @@ class QuizRepositoryImpl implements QuizRepository {
 
   @override
   Future<Either<void>> saveQuizResult(QuizModel quiz, String userId) async {
-    try {
-      final quizResultData = {
-        'userId': userId,
-        'quizId': 'stage_quiz',
-        'timestamp': FieldValue.serverTimestamp(),
-        'score': 0,
-        'answers': quiz.questions
-            .map((q) => {
-                  'questionId': q.id,
-                  'selectedOptionId': '',
-                  'isCorrect': false,
-                })
-            .toList(),
-      };
+    throw UnimplementedError();
 
-      return Either.success(null);
-    } on FirebaseException catch (e) {
-      return Either.error(Failure(
-          type: FailureType.firestoreOperationFailure,
-          message: 'Firestore error saving quiz result: ${e.message}'));
-    } catch (e) {
-      return Either.error(Failure(
-          type: FailureType.dataMappingFailure,
-          message: 'Error saving quiz result: ${e.toString()}'));
-    }
+    //   try {
+    //     final quizResultData = {
+    //       'userId': userId,
+    //       'quizId': 'stage_quiz',
+    //       'timestamp': FieldValue.serverTimestamp(),
+    //       'score': 0,
+    //       'answers': quiz.questions
+    //           .map((q) => {
+    //                 'questionId': q.id,
+    //                 'selectedOptionId': '',
+    //                 'isCorrect': false,
+    //               })
+    //           .toList(),
+    //     };
+
+    //     return Either.success(null);
+    //   } on FirebaseException catch (e) {
+    //     return Either.error(Failure(
+    //         type: FailureType.firestoreOperationFailure,
+    //         message: 'Firestore error saving quiz result: ${e.message}'));
+    //   } catch (e) {
+    //     return Either.error(Failure(
+    //         type: FailureType.dataMappingFailure,
+    //         message: 'Error saving quiz result: ${e.toString()}'));
+    //   }
+    // }
   }
 }

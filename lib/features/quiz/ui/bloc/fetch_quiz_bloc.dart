@@ -24,7 +24,9 @@ class FetchQuizBloc extends Bloc<FetchQuizEvent, FetchQuizState> {
     emit(state.copyWith(
       blocState: BlocState.loading,
     ));
-    final Either<QuizModel> result = await _quizRepository.getQuiz();
+    final Either<QuizModel> result = await _quizRepository.getQuiz(
+      path: '/startQuizes/FTND/questions',
+    );
 
     result.fold(
       (failure) => emit(state.copyWith(
