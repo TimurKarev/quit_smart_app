@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quit_smart_app/features/quiz/ui/bloc/quiz_controller/quiz_controller_bloc.dart';
 import 'package:quit_smart_app/ui/theme/app_theme.dart';
+import 'package:quit_smart_app/features/quiz/domain/model/quiz_result.dart';
 
 import 'widgets/quiz_option_widget.dart';
+import 'widgets/quiz_result_view.dart';
 
 class QuizScreen extends StatelessWidget {
   const QuizScreen({super.key});
@@ -21,33 +23,27 @@ class _QuizScreenView extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    final bottomAppBarTheme = Theme.of(context).bottomAppBarTheme;
 
     final String appBarTitle = "QuitSmart";
     final String informationText = "Information";
     final String loginButtonText = "Login";
     final String assessmentTitle = "Smoking Habits Assessment";
-    final String previousButtonText = "Previous";
-    final String nextButtonText = "Next";
-    final String submitButtonText = "Submit";
-    final String resultsTitleText = "Quiz Results";
-    final String scoreText = "Your Score:";
-    final String tryAgainButtonText = "Try Again";
+
+    // Strings for QuizResultView
+    const String resultsTitleText = "Quiz Results";
+    const String scoreLabelText = "Your Score:";
+    const String errorTitleText = "Error Occurred";
+    const String tryAgainButtonText = "Try Again";
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          appBarTitle,
-        ),
+        title: Text(appBarTitle),
         actions: [
           TextButton(
             onPressed: () {
               // TODO: Implement Information action
             },
-            child: Text(
-              informationText,
-              style: AppTheme.appBarActionTextStyle,
-            ),
+            child: Text(informationText, style: AppTheme.appBarActionTextStyle),
           ),
           const SizedBox(width: 16),
           Padding(
@@ -64,9 +60,7 @@ class _QuizScreenView extends StatelessWidget {
       body: BlocBuilder<QuizControllerBloc, QuizControllerState>(
         builder: (context, state) {
           if (state is QuizControllerInitial) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Center(child: CircularProgressIndicator());
           }
 
           if (state is QuizControllerInProgress) {
@@ -77,6 +71,11 @@ class _QuizScreenView extends StatelessWidget {
                 "Question ${state.currentQuestionIndex + 1} of ${state.quiz.questions.length}";
             final progressCompleteText =
                 "${(progress * 100).toInt()}% Complete";
+
+            // TODO: Replace with l10n
+            const String previousButtonText = "Previous";
+            const String nextButtonText = "Next";
+            const String submitButtonText = "Submit";
 
             return SingleChildScrollView(
               child: Center(
@@ -135,7 +134,9 @@ class _QuizScreenView extends StatelessWidget {
                         const SizedBox(height: 24),
                         Text(
                           currentQuestion.questionText,
-                          style: textTheme.titleLarge?.copyWith(color: colorScheme.onSurface),
+                          style: textTheme.titleLarge?.copyWith(
+                            color: colorScheme.onSurface,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 32),
@@ -189,7 +190,8 @@ class _QuizScreenView extends StatelessWidget {
                                         );
                                       },
                               child: Text(
-                                state.isLastQuestion
+                                state.currentQuestionIndex ==
+                                        state.quiz.questions.length - 1
                                     ? submitButtonText
                                     : nextButtonText,
                               ),
@@ -203,53 +205,35 @@ class _QuizScreenView extends StatelessWidget {
               ),
             );
           } else if (state is QuizControllerResult) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(resultsTitleText, style: textTheme.headlineMedium),
-                    const SizedBox(height: 24),
-                    Text(
-                      '$scoreText ${state.score}',
-                      style: textTheme.titleLarge,
-                    ),
-                    const SizedBox(height: 32),
-                    Text(state.resultText, style: textTheme.titleLarge),
-                    const SizedBox(height: 32),
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<QuizControllerBloc>().add(
-                          QuizControllerInitialized(quiz: state.quiz),
-                        );
-                      },
-                      child: Text(tryAgainButtonText),
-                    ),
-                  ],
-                ),
-              ),
+            return QuizResultView(
+              smokingStageResult: state.smokingStageResult,
+              onButtonPressed: () {
+                context.read<QuizControllerBloc>().add(
+                  QuizControllerInitialized(quiz: state.quiz),
+                );
+              },
             );
           } else if (state is QuizControllerFailure) {
-            return Center(child: Text(state.message));
-          } else {
-            return const Center(child: Text("An unexpected error occurred."));
+            return QuizResultView(
+              smokingStageResult: SmokingStageResult.error(
+                errorMessage: state.message,
+                actionButtonText: state.quiz != null ? "Try Again" : "Go Back",
+              ),
+              onButtonPressed: () {
+                if (state.quiz != null) {
+                  context.read<QuizControllerBloc>().add(
+                    QuizControllerInitialized(quiz: state.quiz!),
+                  );
+                } else {
+                  // If no quiz data in failure, pop the screen
+                  // Or dispatch an event to navigate to a different screen
+                  Navigator.of(context).pop();
+                }
+              },
+            );
           }
+          return const Center(child: Text('Something went wrong'));
         },
-      ),
-      bottomNavigationBar: Container(
-        height: 60,
-        padding: const EdgeInsets.all(16.0),
-        decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: Theme.of(context).dividerColor)),
-          color: bottomAppBarTheme.color,
-        ),
-        child: Center(
-          child: Text(
-            " 2025 QuitSmart. All rights reserved.",
-            style: AppTheme.footerTextStyle,
-          ),
-        ),
       ),
     );
   }

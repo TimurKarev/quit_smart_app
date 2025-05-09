@@ -1,19 +1,21 @@
 part of 'quiz_controller_bloc.dart';
 
-abstract class QuizControllerState extends Equatable {
+sealed class QuizControllerState extends Equatable {
   const QuizControllerState();
 
   @override
   List<Object?> get props => [];
 }
 
-class QuizControllerInitial extends QuizControllerState {}
+final class QuizControllerInitial extends QuizControllerState {}
+
+final class QuizControllerLoading extends QuizControllerState {}
 
 class QuizControllerInProgress extends QuizControllerState {
   final QuizModel quiz;
   final int currentQuestionIndex;
   final Map<String, QuizOption?>
-  selectedAnswers; // questionId -> selectedOption
+  selectedAnswers; // questionId to selected QuizOption
 
   const QuizControllerInProgress({
     required this.quiz,
@@ -22,10 +24,6 @@ class QuizControllerInProgress extends QuizControllerState {
   });
 
   QuizQuestion get currentQuestion => quiz.questions[currentQuestionIndex];
-  bool get isLastQuestion => currentQuestionIndex == quiz.questions.length - 1;
-
-  @override
-  List<Object?> get props => [quiz, currentQuestionIndex, selectedAnswers];
 
   QuizControllerInProgress copyWith({
     QuizModel? quiz,
@@ -38,38 +36,32 @@ class QuizControllerInProgress extends QuizControllerState {
       selectedAnswers: selectedAnswers ?? this.selectedAnswers,
     );
   }
+
+  @override
+  List<Object?> get props => [quiz, currentQuestionIndex, selectedAnswers];
 }
 
 class QuizControllerResult extends QuizControllerState {
-  final QuizModel quiz;
-  final Map<String, QuizOption?> selectedAnswers;
   final int score;
-  final int totalQuestions;
-  final String resultText;
+  final SmokingStageResult smokingStageResult;
+  final QuizModel quiz; // Keep for potential retry
 
   const QuizControllerResult({
-    required this.quiz,
-    required this.selectedAnswers,
     required this.score,
-    required this.totalQuestions,
-    required this.resultText,
+    required this.smokingStageResult,
+    required this.quiz,
   });
 
   @override
-  List<Object?> get props => [
-    quiz,
-    selectedAnswers,
-    score,
-    totalQuestions,
-    resultText,
-  ];
+  List<Object?> get props => [score, smokingStageResult, quiz];
 }
 
 class QuizControllerFailure extends QuizControllerState {
   final String message;
+  final QuizModel? quiz; // For retrying the specific quiz
 
-  const QuizControllerFailure({required this.message});
+  const QuizControllerFailure({required this.message, this.quiz});
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, quiz];
 }
