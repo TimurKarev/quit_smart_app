@@ -228,6 +228,8 @@ class _QuizScreenView extends StatelessWidget {
                       style: textTheme.titleLarge,
                     ),
                     const SizedBox(height: 32),
+                    Text(state.resultText, style: textTheme.titleLarge),
+                    const SizedBox(height: 32),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: colorScheme.primary,

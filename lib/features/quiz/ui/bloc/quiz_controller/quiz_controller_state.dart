@@ -45,16 +45,24 @@ class QuizControllerResult extends QuizControllerState {
   final Map<String, QuizOption?> selectedAnswers;
   final int score;
   final int totalQuestions;
+  final String resultText;
 
   const QuizControllerResult({
     required this.quiz,
     required this.selectedAnswers,
     required this.score,
     required this.totalQuestions,
+    required this.resultText,
   });
 
   @override
-  List<Object?> get props => [quiz, selectedAnswers, score, totalQuestions];
+  List<Object?> get props => [
+    quiz,
+    selectedAnswers,
+    score,
+    totalQuestions,
+    resultText,
+  ];
 }
 
 class QuizControllerFailure extends QuizControllerState {
