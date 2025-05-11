@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
+import 'package:quit_smart_app/routing/app_router.dart';
 import 'package:quit_smart_app/ui/theme/color_palette.dart';
 
 class SignInPage extends StatelessWidget {
@@ -222,12 +224,10 @@ class SignInPage extends StatelessWidget {
                             color: ColorPalette.neutral900,
                             decoration: TextDecoration.underline,
                           ), // text-neutral-900
-                          recognizer:
-                              TapGestureRecognizer()
-                                ..onTap = () {
-                                  // TODO: Navigate to Sign Up page
-                                  print('Sign Up Tapped');
-                                },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              GoRouter.of(context).replace(AppRoutes.createAccount);
+                            },
                         ),
                       ],
                     ),
