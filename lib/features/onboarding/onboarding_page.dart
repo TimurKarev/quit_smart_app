@@ -125,9 +125,7 @@ class OnboardingPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   OutlinedButton(
                     onPressed: () {
-                      // TODO: Implement Sign In / Register action
-                      // Example navigation (if needed):
-                      // context.push(AppRoutes.signIn); // Assuming a sign in route exists
+                      context.push(AppRoutes.signIn);
                     },
                     child: Text(l10n.onboardingButtonSignInRegister),
                   ),
