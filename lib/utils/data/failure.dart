@@ -5,6 +5,7 @@ enum FailureType {
   noValueInEither,
   firestoreOperationFailure,
   dataMappingFailure,
+  authenticationFailure,
   ;
 
   Failure get failure => Failure(type: this, message: name);

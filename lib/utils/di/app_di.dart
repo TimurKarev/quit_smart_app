@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:quit_smart_app/features/auth/data/repository/fire_auth_repository.dart';
+import 'package:quit_smart_app/features/auth/domain/repository/auth_repository.dart';
 import 'package:quit_smart_app/features/quiz/domain/repository/quiz_repository.dart';
 import 'package:quit_smart_app/features/quiz/repository/impl.dart';
 import 'package:quit_smart_app/utils/firebase/firestore_service.dart';
@@ -24,9 +27,22 @@ class AppDi {
         return dependencies[T] as T;
       }
 
-      final repository = QuizRepositoryImpl(
-        firestoreService: get<FirestoreService>(keepAlive: true),
-      ) as T;
+      final repository =
+          QuizRepositoryImpl(
+                firestoreService: get<FirestoreService>(keepAlive: true),
+              )
+              as T;
+      if (keepAlive) {
+        dependencies[T] = repository;
+      }
+      return repository;
+    } else if (T == AuthRepository) {
+      if (dependencies.containsKey(T)) {
+        return dependencies[T] as T;
+      }
+
+      final repository =
+          FireAuthRepository(firebaseAuth: FirebaseAuth.instance) as T;
       if (keepAlive) {
         dependencies[T] = repository;
       }
