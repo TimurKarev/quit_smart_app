@@ -83,7 +83,7 @@ class AppTheme {
       // Padding is handled by the widget inside usually
     ),
     progressIndicatorTheme: const ProgressIndicatorThemeData(
-      color: ColorPalette.baseContent, // Default color for progress indicators
+      color: ColorPalette.primary, // Default color for progress indicators
     ),
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
