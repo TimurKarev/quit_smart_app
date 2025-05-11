@@ -2,9 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:go_router/go_router.dart';
 import 'package:quit_smart_app/features/auth/ui/bloc/auth/auth_bloc.dart';
-import 'package:quit_smart_app/routing/app_router.dart';
 import 'package:quit_smart_app/ui/theme/color_palette.dart';
 
 class SignInPage extends StatelessWidget {
@@ -230,9 +228,9 @@ class SignInPage extends StatelessWidget {
                           recognizer:
                               TapGestureRecognizer()
                                 ..onTap = () {
-                                  GoRouter.of(
-                                    context,
-                                  ).replace(AppRoutes.createAccount);
+                                  // GoRouter.of(
+                                  //   context,
+                                  // ).replace(AppRoutes.createAccount);
                                 },
                         ),
                       ],

@@ -5,28 +5,24 @@ class AuthState extends Equatable {
   const AuthState({
     required this.user,
     required this.failureMessage,
-    required this.isLoading,
   });
 
   const AuthState.init()
     : this(
-        user: const UnauthenticatedUser(),
+        user: const UnknownUser(),
         failureMessage: '',
-        isLoading: false,
       );
 
-  AuthState copyWith({AppUser? user, String? failureMessage, bool? isLoading}) {
+  AuthState copyWith({AppUser? user, String? failureMessage}) {
     return AuthState(
       user: user ?? this.user,
       failureMessage: failureMessage ?? this.failureMessage,
-      isLoading: isLoading ?? this.isLoading,
     );
   }
 
   final AppUser user;
   final String failureMessage;
-  final bool isLoading;
 
   @override
-  List<Object> get props => [user, failureMessage, isLoading];
+  List<Object> get props => [user, failureMessage];
 }

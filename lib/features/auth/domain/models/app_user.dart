@@ -16,3 +16,7 @@ class AuthenticatedUser extends AppUser {
 class UnauthenticatedUser extends AppUser {
   const UnauthenticatedUser();
 }
+
+class UnknownUser extends AppUser {
+  const UnknownUser();
+}

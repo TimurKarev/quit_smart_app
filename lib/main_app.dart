@@ -16,23 +16,29 @@ class MainApp extends StatelessWidget {
     return RepositoryProvider(
       create: (context) => AppDi({}),
       child: BlocProvider(
+        lazy: false,
         create:
             (context) => AuthBloc(
               authRepository: context.read<AppDi>().get<AuthRepository>(),
             )..add(const AuthSubscriptionRequested()),
-        child: MaterialApp.router(
-          routerConfig: router,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: const [Locale('en', ''), Locale('ru', '')],
-          themeMode: ThemeMode.system,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.lightTheme,
-          debugShowCheckedModeBanner: false,
+        child: Builder(
+          builder: (context) {
+            final authBloc = context.watch<AuthBloc>();
+            return MaterialApp.router(
+              routerConfig: createAppRouter(authBloc),
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [Locale('en', ''), Locale('ru', '')],
+              themeMode: ThemeMode.system,
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.lightTheme,
+              debugShowCheckedModeBanner: false,
+            );
+          },
         ),
       ),
     );

@@ -27,75 +27,80 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSubscriptionRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
-    await emit.forEach<Either<AppUser>>(
+    print('[AuthBloc] _onAuthSubscriptionRequested: Subscribing to user stream...');
+    // emit(state.copyWith(user: const UnknownUser())); // Initial state is already UnknownUser
+
+    await emit.onEach<Either<AppUser>>(
       _authRepository.getUser(),
       onData: (eitherUser) {
-        AuthState stateToEmit = state;
+        print('[AuthBloc] _onAuthSubscriptionRequested: onData received: $eitherUser');
+        AuthState stateToEmit = state; // Initialize with current state
         eitherUser.fold(
           (failure) {
+            print('[AuthBloc] _onAuthSubscriptionRequested: onData - failure: ${failure.message}');
             stateToEmit = AuthState(
               user: const UnauthenticatedUser(),
               failureMessage: failure.message,
-              isLoading: false,
             );
           },
           (user) {
+            print('[AuthBloc] _onAuthSubscriptionRequested: onData - success: $user');
             if (user is AuthenticatedUser) {
               stateToEmit = AuthState(
                 user: user,
                 failureMessage: '',
-                isLoading: false,
               );
             } else {
               stateToEmit = AuthState(
                 user: const UnauthenticatedUser(),
-                failureMessage: 'unknownError',
-                isLoading: false,
+                failureMessage: '',
               );
             }
           },
         );
-        return stateToEmit;
+        emit(stateToEmit); // Emit the new state
       },
       onError: (error, stackTrace) {
-        return AuthState(
-          user: const UnauthenticatedUser(),
+        print('[AuthBloc] _onAuthSubscriptionRequested: onError: $error');
+        // It's important to emit a state here too, otherwise BLoC might not update.
+        emit(AuthState(
+          user: const UnauthenticatedUser(), 
           failureMessage: error.toString(),
-          isLoading: false,
-        );
+        ));
       },
     );
+    print('[AuthBloc] _onAuthSubscriptionRequested: Subscription ended or stream closed.');
   }
 
   Future<void> _onGoogleSignInRequested(
     AuthGoogleSignInRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(user: const UnknownUser()));
     final result = await _authRepository.signInWithGoogle();
     if (!result.isSuccess) {
       emit(
         state.copyWith(
-          isLoading: false,
+          user: const UnauthenticatedUser(),
           failureMessage: result.failure?.message,
         ),
       );
-    }
+    } 
+    // On success, the user stream from _onAuthSubscriptionRequested will emit AuthenticatedUser
   }
 
   Future<void> _onSignOutRequested(
     AuthSignOutRequested event,
     Emitter<AuthState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(user: const UnknownUser()));
     final result = await _authRepository.logOut();
     result.fold(
       (failure) => emit(
-        state.copyWith(isLoading: false, failureMessage: failure.message),
+        state.copyWith(user: const UnauthenticatedUser(), failureMessage: failure.message),
       ),
       (unauthenticatedUser) {
-        emit(state.copyWith(isLoading: false, user: unauthenticatedUser));
+        emit(state.copyWith(user: unauthenticatedUser));
       },
     );
   }
