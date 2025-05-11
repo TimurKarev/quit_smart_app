@@ -1,8 +1,9 @@
 {
   "project_info": {
     "project_number": "391813617115",
+    "firebase_url": "https://quit-smart-app-default-rtdb.firebaseio.com",
     "project_id": "quit-smart-app",
-    "storage_bucket": "quit-smart-app.firebasestorage.app"
+    "storage_bucket": "quit-smart-app.appspot.com"
   },
   "client": [
     {
@@ -12,7 +13,12 @@
           "package_name": "com.example.quit_smart_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "391813617115-q0pug3jplvn2rq639d4904fqav2m62qt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDZtOVjoYH3qR-FMDinRZSQ6cs_wMchsCU"
@@ -20,7 +26,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "391813617115-q0pug3jplvn2rq639d4904fqav2m62qt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "391813617115-obbot9iq230n56ojp4mbtfu484shrlkg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.quitSmartApp"
+              }
+            }
+          ]
         }
       }
     }

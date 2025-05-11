@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:quit_smart_app/features/auth/domain/models/app_user.dart';
 import 'package:quit_smart_app/features/auth/domain/repository/auth_repository.dart';
@@ -9,7 +9,7 @@ import 'package:rxdart/rxdart.dart';
 // Implementation of AuthRepository using Firebase Authentication and Google Sign-In.
 class FireAuthRepository implements AuthRepository {
   // Firebase Authentication instance for user management.
-  final firebase_auth.FirebaseAuth firebaseAuth;
+  final FirebaseAuth firebaseAuth;
 
   // Constructor, allowing injection of FirebaseAuth and GoogleSignIn instances
   // for testing or custom configuration. Defaults to standard instances if not provided.
@@ -68,14 +68,13 @@ class FireAuthRepository implements AuthRepository {
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
       // Create a Firebase credential using Google auth details.
-      final firebase_auth.AuthCredential credential = firebase_auth
-          .GoogleAuthProvider.credential(
+      final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
       // Sign in to Firebase with the Google credential.
-      final firebase_auth.UserCredential userCredential = await firebaseAuth
+      final UserCredential userCredential = await firebaseAuth
           .signInWithCredential(credential);
       final firebaseUser = userCredential.user;
 

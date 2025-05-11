@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quit_smart_app/features/auth/ui/bloc/auth/auth_bloc.dart';
 import 'package:quit_smart_app/routing/app_router.dart';
 import 'package:quit_smart_app/ui/theme/color_palette.dart';
 
@@ -173,8 +175,9 @@ class SignInPage extends StatelessWidget {
                           icon: FontAwesomeIcons.google,
                           text: 'Google',
                           onPressed: () {
-                            // TODO: Implement Google sign in
-                            print('Google Sign In Tapped');
+                            context.read<AuthBloc>().add(
+                              AuthGoogleSignInRequested(),
+                            );
                           },
                           borderColor:
                               ColorPalette.neutral200, // border-neutral-200
@@ -224,10 +227,13 @@ class SignInPage extends StatelessWidget {
                             color: ColorPalette.neutral900,
                             decoration: TextDecoration.underline,
                           ), // text-neutral-900
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              GoRouter.of(context).replace(AppRoutes.createAccount);
-                            },
+                          recognizer:
+                              TapGestureRecognizer()
+                                ..onTap = () {
+                                  GoRouter.of(
+                                    context,
+                                  ).replace(AppRoutes.createAccount);
+                                },
                         ),
                       ],
                     ),
