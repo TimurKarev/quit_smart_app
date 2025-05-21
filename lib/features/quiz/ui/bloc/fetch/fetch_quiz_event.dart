@@ -1,6 +1,6 @@
 part of 'fetch_quiz_bloc.dart';
 
-// Removed import 'package:equatable/equatable.dart'; 
+// Removed import 'package:equatable/equatable.dart';
 
 abstract class FetchQuizEvent extends Equatable {
   const FetchQuizEvent();
@@ -9,4 +9,11 @@ abstract class FetchQuizEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchQuizRequested extends FetchQuizEvent {}
+class FetchQuizRequested extends FetchQuizEvent {
+  final String locale;
+
+  const FetchQuizRequested({required this.locale});
+
+  @override
+  List<Object> get props => [locale];
+}

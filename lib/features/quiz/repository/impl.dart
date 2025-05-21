@@ -18,13 +18,14 @@ class QuizRepositoryImpl implements QuizRepository {
   @override
   Future<Either<QuizModel>> getQuiz({
     required String path,
+    required String locale,
   }) async {
     try {
       final List<QuizQuestion> questions =
           await _firestoreService.getCollection<QuizQuestion>(
         path: path,
         mapper: (documentData) =>
-            QuizFirestoreMapper.quizQuestionFromMap(documentData, 'ru'),
+            QuizFirestoreMapper.quizQuestionFromMap(documentData, locale),
       );
 
       if (questions.isEmpty) {

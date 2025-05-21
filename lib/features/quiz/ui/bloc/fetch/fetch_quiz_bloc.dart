@@ -26,6 +26,7 @@ class FetchQuizBloc extends Bloc<FetchQuizEvent, FetchQuizState> {
     ));
     final Either<QuizModel> result = await _quizRepository.getQuiz(
       path: '/startQuizes/FTND/questions',
+      locale: event.locale,
     );
 
     result.fold(

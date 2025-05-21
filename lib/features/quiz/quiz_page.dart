@@ -4,6 +4,7 @@ import 'package:quit_smart_app/features/quiz/domain/repository/quiz_repository.d
 import 'package:quit_smart_app/features/quiz/ui/bloc/fetch/fetch_quiz_bloc.dart';
 import 'package:quit_smart_app/features/quiz/ui/bloc/quiz_controller/quiz_controller_bloc.dart';
 import 'package:quit_smart_app/features/quiz/ui/quiz_screen.dart';
+import 'package:quit_smart_app/features/settings/ui/bloc/user_settings_bloc.dart';
 import 'package:quit_smart_app/utils/bloc/bloc_state.dart';
 import 'package:quit_smart_app/utils/di/app_di.dart';
 
@@ -15,10 +16,12 @@ class QuizPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create:
-              (context) => FetchQuizBloc(
-                quizRepository: context.read<AppDi>().get<QuizRepository>(),
-              )..add(FetchQuizRequested()),
+          create: (context) => FetchQuizBloc(
+            quizRepository: context.read<AppDi>().get<QuizRepository>(),
+          )..add(
+              FetchQuizRequested(
+                  locale: context.read<UserSettingsBloc>().state.lang),
+            ),
         ),
         BlocProvider(create: (context) => QuizControllerBloc()),
       ],
@@ -26,8 +29,8 @@ class QuizPage extends StatelessWidget {
         listener: (context, state) {
           if (state.blocState == BlocState.success) {
             context.read<QuizControllerBloc>().add(
-              QuizControllerInitialized(quiz: state.quiz),
-            );
+                  QuizControllerInitialized(quiz: state.quiz),
+                );
           }
         },
         child: const QuizScreen(),

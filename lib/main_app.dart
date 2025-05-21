@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quit_smart_app/features/settings/ui/bloc/user_settings_bloc.dart';
 import 'package:quit_smart_app/ui/theme/app_theme.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:quit_smart_app/generated/l10n/app_localizations.dart';
@@ -26,19 +27,22 @@ class _MainAppState extends State<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: _router,
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [Locale('en', ''), Locale('ru', '')],
-      themeMode: ThemeMode.system,
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.lightTheme,
-      debugShowCheckedModeBanner: false,
+    return BlocProvider(
+      create: (context) => UserSettingsBloc()..add(LoadUserSettings()),
+      child: MaterialApp.router(
+        routerConfig: _router,
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [Locale('en', ''), Locale('ru', '')],
+        themeMode: ThemeMode.system,
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.lightTheme,
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

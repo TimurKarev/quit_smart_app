@@ -5,6 +5,7 @@ import 'package:quit_smart_app/ui/ui_kit/uikit.dart';
 import 'package:quit_smart_app/generated/l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart'; // Import GoRouter
 import 'package:quit_smart_app/routing/app_router.dart'; // Import AppRoutes
+import 'package:quit_smart_app/features/settings/ui/language_selection_widget.dart';
 
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({super.key});
@@ -20,6 +21,8 @@ class OnboardingPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(l10n.onboardingAppBarTitle),
         actions: [
+          const LanguageSelectionWidget(),
+          const SizedBox(width: 16), // Add some spacing
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(

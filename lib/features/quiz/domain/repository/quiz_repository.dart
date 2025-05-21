@@ -4,6 +4,7 @@ import 'package:quit_smart_app/utils/data/either.dart';
 abstract class QuizRepository {
   Future<Either<QuizModel>> getQuiz({
     required String path,
+    required String locale,
   });
   Future<Either<void>> saveQuizResult(QuizModel quiz, String userId);
 }
