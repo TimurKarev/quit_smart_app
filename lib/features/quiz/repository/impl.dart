@@ -24,7 +24,7 @@ class QuizRepositoryImpl implements QuizRepository {
           await _firestoreService.getCollection<QuizQuestion>(
         path: path,
         mapper: (documentData) =>
-            QuizFirestoreMapper.quizQuestionFromMap(documentData),
+            QuizFirestoreMapper.quizQuestionFromMap(documentData, 'ru'),
       );
 
       if (questions.isEmpty) {

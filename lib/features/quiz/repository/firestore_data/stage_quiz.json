@@ -1,60 +1,174 @@
 [
-    {
-      "id": "1",
-      "questionText": "How soon after you wake up do you smoke your first cigarette?",
-      "options": [
-        { "text": "Within 5 minutes", "weight": 3 },
-        { "text": "6-30 minutes", "weight": 2 },
-        { "text": "31-60 minutes", "weight": 1 },
-        { "text": "After 60 minutes", "weight": 0 }
-      ],
-      "questionType": "single_choice"
+  {
+    "id": "1",
+    "questionText": {
+      "en": "How soon after you wake up do you smoke your first cigarette?",
+      "ru": "Как скоро после пробуждения вы выкуриваете свою первую сигарету?"
     },
-    {
-      "id": "2",
-      "questionText": "Do you find it difficult to refrain from smoking in places where it is forbidden (e.g., in church, at the library, in cinemas)?",
-      "options": [
-        { "text": "Yes", "weight": 1 },
-        { "text": "No", "weight": 0 }
-      ],
-      "questionType": "single_choice"
+    "options": [
+      {
+        "text": {
+          "en": "Within 5 minutes",
+          "ru": "В течение 5 минут"
+        },
+        "weight": 3
+      },
+      {
+        "text": {
+          "en": "6-30 minutes",
+          "ru": "6-30 минут"
+        },
+        "weight": 2
+      },
+      {
+        "text": {
+          "en": "31-60 minutes",
+          "ru": "31-60 минут"
+        },
+        "weight": 1
+      },
+      {
+        "text": {
+          "en": "After 60 minutes",
+          "ru": "Через 60 минут"
+        },
+        "weight": 0
+      }
+    ],
+    "questionType": "single_choice"
+  },
+  {
+    "id": "2",
+    "questionText": {
+      "en": "Do you find it difficult to refrain from smoking in places where it is forbidden (e.g., in church, at the library, in cinemas)?",
+      "ru": "Вам трудно воздерживаться от курения в местах, где это запрещено (например, в церкви, библиотеке, кинотеатрах)?"
     },
-    {
-      "id": "3",
-      "questionText": "Which cigarette would you hate most to give up?",
-      "options": [
-        { "text": "The first one in the morning", "weight": 1 },
-        { "text": "Any other one", "weight": 0 }
-      ],
-      "questionType": "single_choice"
+    "options": [
+      {
+        "text": {
+          "en": "Yes",
+          "ru": "Да"
+        },
+        "weight": 1
+      },
+      {
+        "text": {
+          "en": "No",
+          "ru": "Нет"
+        },
+        "weight": 0
+      }
+    ],
+    "questionType": "single_choice"
+  },
+  {
+    "id": "3",
+    "questionText": {
+      "en": "Which cigarette would you hate most to give up?",
+      "ru": "От какой сигареты вам было бы труднее всего отказаться?"
     },
-    {
-      "id": "4",
-      "questionText": "How many cigarettes per day do you smoke?",
-      "options": [
-        { "text": "10 or less", "weight": 0 },
-        { "text": "11-20", "weight": 1 },
-        { "text": "21-30", "weight": 2 },
-        { "text": "31 or more", "weight": 3 }
-      ],
-      "questionType": "single_choice"
+    "options": [
+      {
+        "text": {
+          "en": "The first one in the morning",
+          "ru": "Первая утром"
+        },
+        "weight": 1
+      },
+      {
+        "text": {
+          "en": "Any other one",
+          "ru": "Любая другая"
+        },
+        "weight": 0
+      }
+    ],
+    "questionType": "single_choice"
+  },
+  {
+    "id": "4",
+    "questionText": {
+      "en": "How many cigarettes per day do you smoke?",
+      "ru": "Сколько сигарет в день вы выкуриваете?"
     },
-    {
-      "id": "5",
-      "questionText": "Do you smoke more frequently during the first hours after waking than during the rest of the day?",
-      "options": [
-        { "text": "Yes", "weight": 1 },
-        { "text": "No", "weight": 0 }
-      ],
-      "questionType": "single_choice"
+    "options": [
+      {
+        "text": {
+          "en": "10 or less",
+          "ru": "10 или меньше"
+        },
+        "weight": 0
+      },
+      {
+        "text": {
+          "en": "11-20",
+          "ru": "11-20"
+        },
+        "weight": 1
+      },
+      {
+        "text": {
+          "en": "21-30",
+          "ru": "21-30"
+        },
+        "weight": 2
+      },
+      {
+        "text": {
+          "en": "31 or more",
+          "ru": "31 или более"
+        },
+        "weight": 3
+      }
+    ],
+    "questionType": "single_choice"
+  },
+  {
+    "id": "5",
+    "questionText": {
+      "en": "Do you smoke more frequently during the first hours after waking than during the rest of the day?",
+      "ru": "Курите ли вы чаще в первые часы после пробуждения, чем в течение остального дня?"
     },
-    {
-      "id": "6",
-      "questionText": "Do you still smoke if you are so ill that you are in bed most of the day?",
-      "options": [
-        { "text": "Yes", "weight": 1 },
-        { "text": "No", "weight": 0 }
-      ],
-      "questionType": "single_choice"
-    }
-  ]
+    "options": [
+      {
+        "text": {
+          "en": "Yes",
+          "ru": "Да"
+        },
+        "weight": 1
+      },
+      {
+        "text": {
+          "en": "No",
+          "ru": "Нет"
+        },
+        "weight": 0
+      }
+    ],
+    "questionType": "single_choice"
+  },
+  {
+    "id": "6",
+    "questionText": {
+      "en": "Do you still smoke if you are so ill that you are in bed most of the day?",
+      "ru": "Продолжаете ли вы курить, если настолько больны, что проводите большую часть дня в постели?"
+    },
+    "options": [
+      {
+        "text": {
+          "en": "Yes",
+          "ru": "Да"
+        },
+        "weight": 1
+      },
+      {
+        "text": {
+          "en": "No",
+          "ru": "Нет"
+        },
+        "weight": 0
+      }
+    ],
+    "questionType": "single_choice"
+  }
+]
