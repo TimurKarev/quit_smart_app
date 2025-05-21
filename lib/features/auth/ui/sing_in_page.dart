@@ -91,12 +91,11 @@ class SignInPage extends StatelessWidget {
                         style: textTheme.bodySmall?.copyWith(
                           color: ColorPalette.neutral700,
                         ), // text-neutral-700
-                        recognizer:
-                            TapGestureRecognizer()
-                              ..onTap = () {
-                                // TODO: Implement forgot password
-                                print('Forgot Password Tapped');
-                              },
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            // TODO: Implement forgot password
+                            print('Forgot Password Tapped');
+                          },
                       ),
                     ),
                   ),
@@ -116,13 +115,13 @@ class SignInPage extends StatelessWidget {
                     ).copyWith(
                       backgroundColor:
                           MaterialStateProperty.resolveWith<Color?>((
-                            Set<MaterialState> states,
-                          ) {
-                            if (states.contains(MaterialState.hovered))
-                              return ColorPalette
-                                  .neutral700; // hover:bg-neutral-700
-                            return ColorPalette.neutral800;
-                          }),
+                        Set<MaterialState> states,
+                      ) {
+                        if (states.contains(MaterialState.hovered))
+                          return ColorPalette
+                              .neutral700; // hover:bg-neutral-700
+                        return ColorPalette.neutral800;
+                      }),
                     ),
                     onPressed: () {
                       // TODO: Implement sign in
@@ -174,8 +173,8 @@ class SignInPage extends StatelessWidget {
                           text: 'Google',
                           onPressed: () {
                             context.read<AuthBloc>().add(
-                              AuthGoogleSignInRequested(),
-                            );
+                                  AuthGoogleSignInRequested(),
+                                );
                           },
                           borderColor:
                               ColorPalette.neutral200, // border-neutral-200
@@ -193,8 +192,9 @@ class SignInPage extends StatelessWidget {
                           icon: FontAwesomeIcons.apple,
                           text: 'Apple',
                           onPressed: () {
-                            // TODO: Implement Apple sign in
-                            print('Apple Sign In Tapped');
+                            context.read<AuthBloc>().add(
+                                  AuthAppleSignInRequested(),
+                                );
                           },
                           borderColor:
                               ColorPalette.neutral200, // border-neutral-200
@@ -225,13 +225,12 @@ class SignInPage extends StatelessWidget {
                             color: ColorPalette.neutral900,
                             decoration: TextDecoration.underline,
                           ), // text-neutral-900
-                          recognizer:
-                              TapGestureRecognizer()
-                                ..onTap = () {
-                                  // GoRouter.of(
-                                  //   context,
-                                  // ).replace(AppRoutes.createAccount);
-                                },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // GoRouter.of(
+                              //   context,
+                              // ).replace(AppRoutes.createAccount);
+                            },
                         ),
                       ],
                     ),
@@ -260,12 +259,11 @@ class SignInPage extends StatelessWidget {
                               style: const TextStyle(
                                 decoration: TextDecoration.underline,
                               ),
-                              recognizer:
-                                  TapGestureRecognizer()
-                                    ..onTap = () {
-                                      // TODO: Navigate to Terms of Service
-                                      print('Terms Tapped');
-                                    },
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // TODO: Navigate to Terms of Service
+                                  print('Terms Tapped');
+                                },
                             ),
                             const TextSpan(text: ' and '),
                             TextSpan(
@@ -273,12 +271,11 @@ class SignInPage extends StatelessWidget {
                               style: const TextStyle(
                                 decoration: TextDecoration.underline,
                               ),
-                              recognizer:
-                                  TapGestureRecognizer()
-                                    ..onTap = () {
-                                      // TODO: Navigate to Privacy Policy
-                                      print('Privacy Tapped');
-                                    },
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  // TODO: Navigate to Privacy Policy
+                                  print('Privacy Tapped');
+                                },
                             ),
                           ],
                         ),
@@ -392,10 +389,9 @@ class _SocialButtonState extends State<_SocialButton> {
         ),
         onPressed: widget.onPressed,
         style: OutlinedButton.styleFrom(
-          backgroundColor:
-              _isHovered
-                  ? widget.hoverBgColor
-                  : ColorPalette.baseWhite, // bg-white or hover:bg-neutral-50
+          backgroundColor: _isHovered
+              ? widget.hoverBgColor
+              : ColorPalette.baseWhite, // bg-white or hover:bg-neutral-50
           side: BorderSide(color: widget.borderColor),
           padding: const EdgeInsets.symmetric(vertical: 12.0), // py-3
           shape: RoundedRectangleBorder(

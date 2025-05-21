@@ -24,25 +24,29 @@ class AppLocalizationsRu extends AppLocalizations {
   String get onboardingWelcomeTitle => 'Начните свой путь к жизни без курения';
 
   @override
-  String get onboardingWelcomeDescription => 'QuitSmart помогает вам бросить курить с помощью персонализированных планов, ежедневного отслеживания и поддерживающего сообщества.';
+  String get onboardingWelcomeDescription =>
+      'QuitSmart помогает вам бросить курить с помощью персонализированных планов, ежедневного отслеживания и поддерживающего сообщества.';
 
   @override
   String get onboardingInfoCard1Title => 'Оценка';
 
   @override
-  String get onboardingInfoCard1Description => 'Пройдите наш тест для определения стадии ваших привычек курения';
+  String get onboardingInfoCard1Description =>
+      'Пройдите наш тест для определения стадии ваших привычек курения';
 
   @override
   String get onboardingInfoCard2Title => 'Отслеживайте прогресс';
 
   @override
-  String get onboardingInfoCard2Description => 'Следите за своим путем с помощью инструментов ежедневного отслеживания';
+  String get onboardingInfoCard2Description =>
+      'Следите за своим путем с помощью инструментов ежедневного отслеживания';
 
   @override
   String get onboardingInfoCard3Title => 'Получите поддержку';
 
   @override
-  String get onboardingInfoCard3Description => 'Общайтесь с другими на том же пути';
+  String get onboardingInfoCard3Description =>
+      'Общайтесь с другими на том же пути';
 
   @override
   String get onboardingButtonStartTest => 'Начать тест стадии';

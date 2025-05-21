@@ -6,4 +6,11 @@ abstract class AuthRepository {
   Future<Either<AppUser>> logOut();
 
   Future<Either<AppUser>> signInWithGoogle();
+
+  Future<Either<AppUser>> signInWithApple();
+
+  Future<Either<AppUser>> signInWithCredentials({
+    required String email,
+    required String password,
+  });
 }

@@ -64,7 +64,7 @@ class AppTheme {
       ),
       // Note: actions use Text widgets, so style them directly using appBarActionTextStyle
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 2,
       margin: const EdgeInsets.all(CardConstants.cardPadding),
       shape: RoundedRectangleBorder(

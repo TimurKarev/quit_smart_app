@@ -15,10 +15,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository _authRepository;
 
   AuthBloc({required AuthRepository authRepository})
-    : _authRepository = authRepository,
-      super(const AuthState.init()) {
+      : _authRepository = authRepository,
+        super(const AuthState.init()) {
     on<AuthSubscriptionRequested>(_onAuthSubscriptionRequested);
     on<AuthGoogleSignInRequested>(_onGoogleSignInRequested);
+    on<AuthAppleSignInRequested>(_onAppleSignInRequested);
     on<AuthSignOutRequested>(_onSignOutRequested);
   }
 
@@ -26,24 +27,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthSubscriptionRequested event,
     Emitter<AuthState> emit,
   ) async {
-    print('[AuthBloc] _onAuthSubscriptionRequested: Subscribing to user stream...');
+    print(
+        '[AuthBloc] _onAuthSubscriptionRequested: Subscribing to user stream...');
     // emit(state.copyWith(user: const UnknownUser())); // Initial state is already UnknownUser
 
     await emit.onEach<Either<AppUser>>(
       _authRepository.getUser(),
       onData: (eitherUser) {
-        print('[AuthBloc] _onAuthSubscriptionRequested: onData received: $eitherUser');
+        print(
+            '[AuthBloc] _onAuthSubscriptionRequested: onData received: $eitherUser');
         AuthState stateToEmit = state; // Initialize with current state
         eitherUser.fold(
           (failure) {
-            print('[AuthBloc] _onAuthSubscriptionRequested: onData - failure: ${failure.message}');
+            print(
+                '[AuthBloc] _onAuthSubscriptionRequested: onData - failure: ${failure.message}');
             stateToEmit = AuthState(
               user: const UnauthenticatedUser(),
               failureMessage: failure.message,
             );
           },
           (user) {
-            print('[AuthBloc] _onAuthSubscriptionRequested: onData - success: $user');
+            print(
+                '[AuthBloc] _onAuthSubscriptionRequested: onData - success: $user');
             if (user is AuthenticatedUser) {
               stateToEmit = AuthState(
                 user: user,
@@ -63,12 +68,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         print('[AuthBloc] _onAuthSubscriptionRequested: onError: $error');
         // It's important to emit a state here too, otherwise BLoC might not update.
         emit(AuthState(
-          user: const UnauthenticatedUser(), 
+          user: const UnauthenticatedUser(),
           failureMessage: error.toString(),
         ));
       },
     );
-    print('[AuthBloc] _onAuthSubscriptionRequested: Subscription ended or stream closed.');
+    print(
+        '[AuthBloc] _onAuthSubscriptionRequested: Subscription ended or stream closed.');
   }
 
   Future<void> _onGoogleSignInRequested(
@@ -84,7 +90,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           failureMessage: result.failure?.message,
         ),
       );
-    } 
+    }
     // On success, the user stream from _onAuthSubscriptionRequested will emit AuthenticatedUser
   }
 
@@ -94,26 +100,48 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   ) async {
     debugPrint('[AuthBloc] _onSignOutRequested: Sign out process started.');
     // Optionally, emit a loading/unknown state if sign-out is not instantaneous
-    // emit(state.copyWith(user: const UnknownUser())); 
+    // emit(state.copyWith(user: const UnknownUser()));
     // However, for sign-out, directly going to UnauthenticatedUser is often fine.
 
     final result = await _authRepository.logOut(); // Corrected: Was signOut()
 
     result.fold(
       (failure) {
-        debugPrint('[AuthBloc] _onSignOutRequested: Sign out failed. Error: $failure');
-        // Optionally, emit a state indicating sign-out failure, 
+        debugPrint(
+            '[AuthBloc] _onSignOutRequested: Sign out failed. Error: $failure');
+        // Optionally, emit a state indicating sign-out failure,
         // or revert to previous state if optimistic update was done.
         // For now, we'll assume it falls through to unauthenticated or handles error appropriately elsewhere.
-        // If still authenticated technically, this might be an issue. 
+        // If still authenticated technically, this might be an issue.
         // But typically, even on failure, UI goes to unauth state.
-        emit(state.copyWith(user: const UnauthenticatedUser())); // Or a specific error state if needed
+        emit(state.copyWith(
+            user:
+                const UnauthenticatedUser())); // Or a specific error state if needed
       },
       (_) {
-        debugPrint('[AuthBloc] _onSignOutRequested: Sign out successful. Emitting UnauthenticatedUser.');
+        debugPrint(
+            '[AuthBloc] _onSignOutRequested: Sign out successful. Emitting UnauthenticatedUser.');
         emit(state.copyWith(user: const UnauthenticatedUser()));
       },
     );
-    debugPrint('[AuthBloc] _onSignOutRequested: Sign out process finished. Current state: ${state.user}');
+    debugPrint(
+        '[AuthBloc] _onSignOutRequested: Sign out process finished. Current state: ${state.user}');
+  }
+
+  Future<void> _onAppleSignInRequested(
+    AuthAppleSignInRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(state.copyWith(user: const UnknownUser()));
+    final result = await _authRepository.signInWithApple();
+    if (!result.isSuccess) {
+      emit(
+        state.copyWith(
+          user: const UnauthenticatedUser(),
+          failureMessage: result.failure?.message,
+        ),
+      );
+    }
+    // On success, the user stream from _onAuthSubscriptionRequested will emit AuthenticatedUser
   }
 }

@@ -24,25 +24,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingWelcomeTitle => 'Start Your Smoke-Free Journey';
 
   @override
-  String get onboardingWelcomeDescription => 'QuitSmart helps you quit smoking through personalized plans, daily tracking, and supportive community.';
+  String get onboardingWelcomeDescription =>
+      'QuitSmart helps you quit smoking through personalized plans, daily tracking, and supportive community.';
 
   @override
   String get onboardingInfoCard1Title => 'Assessment';
 
   @override
-  String get onboardingInfoCard1Description => 'Take our stage test to determine your smoking habits';
+  String get onboardingInfoCard1Description =>
+      'Take our stage test to determine your smoking habits';
 
   @override
   String get onboardingInfoCard2Title => 'Track Progress';
 
   @override
-  String get onboardingInfoCard2Description => 'Monitor your journey with daily tracking tools';
+  String get onboardingInfoCard2Description =>
+      'Monitor your journey with daily tracking tools';
 
   @override
   String get onboardingInfoCard3Title => 'Get Support';
 
   @override
-  String get onboardingInfoCard3Description => 'Connect with others on the same journey';
+  String get onboardingInfoCard3Description =>
+      'Connect with others on the same journey';
 
   @override
   String get onboardingButtonStartTest => 'Start Stage Test';
